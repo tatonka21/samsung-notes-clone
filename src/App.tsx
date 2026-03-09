@@ -5,12 +5,15 @@ import StickyButton from "components/sticky";
 import ModelContainer from "components/Model";
 import Form from "components/form";
 import useModel from "store/hooks/useModel";
+import useSideBar from "store/hooks/useSideBar";
 
 function App() {
   const { modelHandler, modelState } = useModel();
+  const { sideTabState } = useSideBar();
 
   const isForm = modelState === "formModel";
-  console.log(modelState);
+  const showSticky = ["All Notes", "Favorites"].includes(sideTabState.tabName);
+
   return (
     <div className={css.app}>
       <SideBar />
@@ -23,7 +26,9 @@ function App() {
           onClose={() => modelHandler("")}
         />
       </ModelContainer>
-      <StickyButton onClickModel={() => modelHandler("formModel")} />
+      {showSticky && (
+        <StickyButton onClickModel={() => modelHandler("formModel")} />
+      )}
     </div>
   );
 }

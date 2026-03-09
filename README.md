@@ -1,46 +1,87 @@
-# Getting Started with Create React App
+# ✨ AI Notes — AI-Powered Productivity Platform
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A Samsung Notes clone evolved into a full-featured AI productivity platform, powered by Google Gemini 2.0 Flash.
+
+## Features
+
+### 📝 AI-Enhanced Notes
+- Create, view, and delete notes (Samsung Notes style)
+- **AI Actions** on each note: Summarize, Expand, Rewrite, Convert to Bullets
+- Powered by Gemini 2.0 Flash
+
+### 💬 AI Chat
+- General-purpose conversational AI
+- Persistent chat sessions with history
+- Markdown rendering with code highlighting
+- Powered by Gemini 2.0 Flash (free tier)
+
+### 🔨 AI App Builder
+- Create web, mobile, API, or other project types
+- Chat with AI to generate architecture, code, and guidance
+- Automatically extracts and tracks generated code files
+- Step-by-step app building workflow
+
+### 📁 File & Folder Manager
+- Hierarchical tree-based file system
+- Create, edit, and delete files and folders
+- Built-in text editor
+- **AI Research Mode**: Enter a topic → AI auto-creates a folder with subtopic notes
+  - Example: "Top 100 AI Opportunities" → creates 10+ researched subtopic files
+
+### 📋 Project Management
+- Kanban board with 4 columns: To Do, In Progress, Done, Blocked
+- Task priorities: Low, Medium, High, Critical
+- Multiple projects with color coding
+- Full task CRUD with drag-column buttons
+
+### 🐙 GitHub Integration
+- Connect via Personal Access Token
+- View all repositories
+- Create new repositories
+- Manage issues (view + create)
+- Browse commit history
+
+### ⚙️ Settings
+- Gemini API key management (masked input)
+- GitHub Personal Access Token setup
+- All settings persisted to localStorage
+
+## Setup
+
+### 1. Get a Gemini API Key (Free)
+Visit [Google AI Studio](https://aistudio.google.com/app/apikey) and create a free API key.
+
+### 2. Get a GitHub Token (Optional)
+Visit [github.com/settings/tokens](https://github.com/settings/tokens) and create a token with `repo` scope.
+
+### 3. Configure in Settings
+Open the app → click **Settings** in the sidebar → enter your keys → Save.
 
 ## Available Scripts
 
-In the project directory, you can run:
+```bash
+npm install     # Install dependencies
+npm start       # Run development server at http://localhost:3000
+npm run build   # Build for production
+npm test        # Run tests
+```
 
-### `npm start`
+## Tech Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- **React 18** + **TypeScript**
+- **Redux Toolkit** — state management
+- **@google/generative-ai** — Gemini 2.0 Flash API
+- **react-markdown** — AI response rendering
+- **react-icons** — iconography
+- **SCSS Modules** — component styling
+- **localStorage** — all data persistence (no backend required)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Screenshots
 
-### `npm test`
+| All Notes | AI Chat | Settings |
+|-----------|---------|----------|
+| ![All Notes](https://github.com/user-attachments/assets/679b5790-90d9-4939-ba81-c21b4124e765) | ![AI Chat](https://github.com/user-attachments/assets/52b21171-33b9-4cc4-8296-6a5d222f6883) | ![Settings](https://github.com/user-attachments/assets/73b05473-e5e9-47d6-abae-1a96aee22ed5) |
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+| App Builder | Files & Folders |
+|-------------|-----------------|
+| ![App Builder](https://github.com/user-attachments/assets/2c090143-49b8-49f5-be39-202505187c99) | ![Files](https://github.com/user-attachments/assets/5f7794db-0e13-4670-a8fb-ddc8a45f79fd) |

@@ -1,7 +1,8 @@
 .app {
   height: 100vh;
   display: grid;
-  grid-template-columns: 20% 1fr;
+  grid-template-columns: 220px 1fr;
+  overflow: hidden;
 }
 
 .side {
@@ -9,29 +10,53 @@
   flex-direction: column;
   padding: 8px;
   background: var(--secondry-background);
-  gap: 10px;
+  gap: 6px;
+  overflow-y: auto;
 }
+
 .logo {
   display: flex;
   align-items: center;
-  h1 {
-    font: 1rem;
+  padding: 12px 8px;
+  border-bottom: 1px solid #333;
+  margin-bottom: 4px;
+  h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #2196f3;
+    letter-spacing: 0.5px;
   }
 }
 
 .controls {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  button {
-    flex: 1;
-    padding: 1rem;
-    background: #323233;
-    outline: none;
-    border: none;
-    border-radius: 6px;
-    &:hover {
-      background: #424244;
-    }
+  gap: 4px;
+}
+
+.navBtn {
+  flex: 1;
+  padding: 10px 12px;
+  background: #323233;
+  outline: none;
+  border: none;
+  border-radius: 6px;
+  color: #e0e0e0;
+  font-size: 0.85rem;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background 0.15s;
+  cursor: pointer;
+  &:hover {
+    background: #424244;
   }
+}
+
+.navIcon {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  opacity: 0.8;
 }
