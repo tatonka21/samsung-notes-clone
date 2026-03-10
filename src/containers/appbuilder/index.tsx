@@ -9,6 +9,7 @@ import appBuilderSlice, {
 } from "store/slices/appBuilder";
 import useSettings from "store/hooks/useSettings";
 import { sendChatMessage } from "services/gemini";
+import JSZip from "jszip";
 import {
   FiPlus,
   FiTrash2,
@@ -19,6 +20,9 @@ import {
   FiSmartphone,
   FiServer,
   FiBox,
+  FiDownload,
+  FiCopy,
+  FiFileText,
 } from "react-icons/fi";
 import css from "styles/appBuilder.module.scss";
 
@@ -47,14 +51,29 @@ const AppBuilder: React.FC = () => {
   const [newProjectDesc, setNewProjectDesc] = useState("");
   const [newProjectType, setNewProjectType] = useState<AppBuilderProject["type"]>("web");
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const [selectedFileName, setSelectedFileName] = useState<string | null>(null);
+  const [copiedFileName, setCopiedFileName] = useState<string | null>(null);
 
   const activeProject = appBuilderState.projects.find(
     (p) => p.id === appBuilderState.activeProjectId
   );
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (messagesEndRef.current?.scrollIntoView) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
   }, [activeProject?.messages]);
+
+  useEffect(() => {
+    if (!activeProject || activeProject.files.length === 0) {
+      setSelectedFileName(null);
+      return;
+    }
+    const exists = activeProject.files.find((f) => f.name === selectedFileName);
+    if (!exists) {
+      setSelectedFileName(activeProject.files[0].name);
+    }
+  }, [activeProject, selectedFileName]);
 
   const handleCreateProject = () => {
     if (!newProjectName.trim()) return;
@@ -70,6 +89,47 @@ const AppBuilder: React.FC = () => {
     setNewProjectType("web");
     setShowNewProject(false);
   };
+
+  const downloadBlob = (blob: Blob, filename: string) => {
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(url);
+  };
+
+  const safeProjectName = (name: string) =>
+    name
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)+/g, "") || "app-builder-project";
+
+  const handleDownloadFile = (file: AppBuilderProject["files"][number]) => {
+    const blob = new Blob([file.content], { type: "text/plain;charset=utf-8" });
+    downloadBlob(blob, file.name);
+  };
+
+  const handleCopyFile = async (file: AppBuilderProject["files"][number]) => {
+    if (!navigator?.clipboard) return;
+    await navigator.clipboard.writeText(file.content);
+    setCopiedFileName(file.name);
+    setTimeout(() => setCopiedFileName(null), 1500);
+  };
+
+  const handleDownloadAll = async () => {
+    if (!activeProject || activeProject.files.length === 0) return;
+    const zip = new JSZip();
+    activeProject.files.forEach((file) => {
+      zip.file(file.name, file.content);
+    });
+    const blob = await zip.generateAsync({ type: "blob" });
+    downloadBlob(blob, `${safeProjectName(activeProject.name)}.zip`);
+  };
+
+  const selectedFile = activeProject?.files.find((f) => f.name === selectedFileName);
 
   const handleSend = async () => {
     const text = input.trim();
@@ -331,6 +391,68 @@ const AppBuilder: React.FC = () => {
               )}
               <div ref={messagesEndRef} />
             </div>
+
+            {activeProject.files.length > 0 && (
+              <div className={css.filesPanel}>
+                <div className={css.filesHeader}>
+                  <div>
+                    <h3>Generated Files</h3>
+                    <p>Ready to copy into your repository or download as a bundle.</p>
+                  </div>
+                  <button className={css.secondaryBtn} onClick={handleDownloadAll}>
+                    <FiDownload /> Download .zip
+                  </button>
+                </div>
+                <div className={css.filesBody}>
+                  <div className={css.fileList}>
+                    {activeProject.files.map((file) => (
+                      <button
+                        key={file.name}
+                        className={`${css.fileItem} ${selectedFileName === file.name ? css.active : ""}`}
+                        onClick={() => setSelectedFileName(file.name)}
+                        aria-label={`Open ${file.name}`}
+                      >
+                        <span className={css.fileIcon}>
+                          <FiFileText />
+                        </span>
+                        <div className={css.fileMeta}>
+                          <span className={css.fileName}>{file.name}</span>
+                          <span className={css.fileLang}>{file.language}</span>
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                  <div className={css.filePreview}>
+                    {selectedFile ? (
+                      <>
+                        <div className={css.previewHeader}>
+                          <div>
+                            <strong>{selectedFile.name}</strong>
+                            <span className={css.fileLangBadge}>{selectedFile.language}</span>
+                          </div>
+                          <div className={css.previewActions}>
+                            <button onClick={() => handleCopyFile(selectedFile)}>
+                              <FiCopy />
+                              {copiedFileName === selectedFile.name ? "Copied" : "Copy"}
+                            </button>
+                            <button onClick={() => handleDownloadFile(selectedFile)}>
+                              <FiDownload /> Download
+                            </button>
+                          </div>
+                        </div>
+                        <pre className={css.codePreview}>
+                          <code>{selectedFile.content}</code>
+                        </pre>
+                      </>
+                    ) : (
+                      <div className={css.previewEmpty}>
+                        <p>Select a file to preview and export it.</p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            )}
 
             <div className={css.inputRow}>
               <textarea
