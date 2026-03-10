@@ -1,0 +1,322 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--primary-background);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: var(--secondry-background);
+  border-bottom: 1px solid #333;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid #444;
+}
+
+.userName {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #e0e0e0;
+}
+
+.userLogin {
+  display: block;
+  font-size: 12px;
+  color: #888;
+}
+
+.headerActions {
+  display: flex;
+  gap: 8px;
+  button {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 14px;
+    background: #333;
+    border: 1px solid #444;
+    border-radius: 6px;
+    color: #ccc;
+    font-size: 13px;
+    cursor: pointer;
+    &:hover { background: #444; color: #fff; }
+    &:disabled { opacity: 0.5; cursor: not-allowed; }
+  }
+}
+
+.error {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: #2a1a1a;
+  border-bottom: 1px solid #f44336;
+  color: #f44336;
+  font-size: 13px;
+}
+
+.newRepoForm, .newIssueForm {
+  padding: 16px 20px;
+  background: var(--secondry-background);
+  border-bottom: 1px solid #333;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  h3 { color: #e0e0e0; font-size: 14px; margin-bottom: 4px; }
+  input, textarea {
+    background: #333;
+    border: 1px solid #444;
+    border-radius: 6px;
+    color: #e0e0e0;
+    padding: 8px 12px;
+    font-size: 13px;
+    &:focus { outline: none; border-color: #2196f3; }
+  }
+  textarea { resize: vertical; }
+}
+
+.checkLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #ccc;
+  font-size: 13px;
+  input { width: auto; }
+}
+
+.formBtns {
+  display: flex;
+  gap: 6px;
+  button {
+    padding: 6px 14px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 13px;
+    &:first-child { background: #2196f3; color: #fff; }
+    &:last-child { background: #444; color: #ccc; }
+    &:disabled { opacity: 0.5; cursor: not-allowed; }
+  }
+}
+
+.tabs {
+  display: flex;
+  gap: 0;
+  padding: 0 20px;
+  background: var(--secondry-background);
+  border-bottom: 1px solid #333;
+  button {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 16px;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: #888;
+    font-size: 13px;
+    cursor: pointer;
+    &:hover { color: #ccc; }
+    &.activeTab {
+      color: #2196f3;
+      border-bottom-color: #2196f3;
+    }
+  }
+}
+
+.content {
+  flex: 1;
+  overflow: auto;
+  padding: 20px;
+}
+
+.loading {
+  color: #888;
+  padding: 20px;
+  text-align: center;
+}
+
+.repoGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 12px;
+}
+
+.repoCard {
+  background: var(--secondry-background);
+  border: 1px solid #333;
+  border-radius: 10px;
+  padding: 14px 16px;
+  cursor: pointer;
+  &:hover { border-color: #2196f3; }
+}
+
+.repoName {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #2196f3;
+  margin-bottom: 6px;
+}
+
+.privateBadge {
+  padding: 1px 7px;
+  background: #333;
+  border-radius: 4px;
+  font-size: 10px;
+  color: #888;
+  font-weight: 400;
+}
+
+.repoDesc {
+  font-size: 12px;
+  color: #888;
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+.repoMeta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+  color: #666;
+  a { color: #666; &:hover { color: #2196f3; } }
+  span { display: flex; align-items: center; gap: 3px; }
+}
+
+.issuesList, .commitsList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 800px;
+}
+
+.listHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+  h3 { color: #e0e0e0; font-size: 14px; }
+  button {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 12px;
+    background: #2196f3;
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 12px;
+    cursor: pointer;
+  }
+}
+
+.issueItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: var(--secondry-background);
+  border-radius: 8px;
+  border: 1px solid #333;
+  &:hover { border-color: #444; }
+}
+
+.issueStatus {
+  font-size: 1.2rem;
+}
+
+.issueInfo {
+  flex: 1;
+  a {
+    display: block;
+    color: #e0e0e0;
+    text-decoration: none;
+    font-size: 13px;
+    &:hover { color: #2196f3; }
+  }
+}
+
+.issueDate {
+  display: block;
+  font-size: 11px;
+  color: #666;
+  margin-top: 2px;
+}
+
+.commitItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 14px;
+  background: var(--secondry-background);
+  border-radius: 8px;
+  border: 1px solid #333;
+  color: #888;
+}
+
+.commitInfo {
+  flex: 1;
+  a {
+    display: block;
+    color: #e0e0e0;
+    text-decoration: none;
+    font-size: 13px;
+    margin-bottom: 2px;
+    &:hover { color: #2196f3; }
+  }
+}
+
+.commitMeta {
+  font-size: 11px;
+  color: #666;
+}
+
+.sha {
+  font-family: monospace;
+  font-size: 11px;
+  color: #666;
+  background: #333;
+  padding: 2px 6px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.noKey {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  text-align: center;
+  color: #888;
+  gap: 12px;
+  h2 { color: #e0e0e0; font-size: 1.5rem; }
+  p { max-width: 400px; line-height: 1.5; }
+  a { color: #2196f3; }
+  code { background: #333; padding: 2px 6px; border-radius: 4px; font-size: 13px; }
+}
+
+.hint {
+  font-size: 13px;
+}

@@ -9,7 +9,7 @@ interface FormProps {
 }
 
 const Form = (props: FormProps) => {
-  const { onClose, onSubmit } = props;
+  const { onClose } = props;
 
   // const dispatch = useDispatch();
   // const formState = useSelector((state: RootState) => state.form);
