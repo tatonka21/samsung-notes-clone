@@ -340,3 +340,147 @@
   gap: 12px;
   h2 { color: #e0e0e0; }
 }
+
+.filesPanel {
+  margin: 0 20px 12px;
+  background: var(--secondry-background);
+  border: 1px solid #333;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.filesHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  border-bottom: 1px solid #333;
+  h3 { margin: 0; color: #e0e0e0; font-size: 14px; }
+  p { margin: 4px 0 0; color: #888; font-size: 12px; }
+}
+
+.secondaryBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: #1a3a5c;
+  border: 1px solid #2196f3;
+  color: #e0f2ff;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  &:hover { background: #0f2c4a; }
+}
+
+.filesBody {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  min-height: 220px;
+}
+
+.fileList {
+  border-right: 1px solid #333;
+  max-height: 320px;
+  overflow-y: auto;
+  background: #1b1b1c;
+}
+
+.fileItem {
+  width: 100%;
+  padding: 10px 12px;
+  display: flex;
+  gap: 10px;
+  background: none;
+  border: none;
+  color: #cfcfcf;
+  border-bottom: 1px solid #262626;
+  text-align: left;
+  cursor: pointer;
+  &:hover { background: #222; }
+  &.active { background: #1a3a5c; }
+}
+
+.fileIcon {
+  font-size: 1rem;
+  padding-top: 2px;
+}
+
+.fileMeta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.fileName {
+  font-size: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fileLang {
+  font-size: 11px;
+  color: #888;
+  text-transform: uppercase;
+}
+
+.filePreview {
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: #141414;
+}
+
+.previewHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  strong { color: #e0e0e0; }
+}
+
+.previewActions {
+  display: flex;
+  gap: 8px;
+  button {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    background: #1a2a3a;
+    border: 1px solid #2196f3;
+    color: #e0f2ff;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    &:hover { background: #2196f3; color: #fff; }
+  }
+}
+
+.fileLangBadge {
+  margin-left: 8px;
+  font-size: 11px;
+  color: #89c3ff;
+  text-transform: uppercase;
+}
+
+.codePreview {
+  background: #0e0e0f;
+  border: 1px solid #222;
+  border-radius: 8px;
+  padding: 12px;
+  color: #d7d7d7;
+  font-size: 13px;
+  line-height: 1.5;
+  overflow: auto;
+  max-height: 260px;
+}
+
+.previewEmpty {
+  color: #888;
+  font-size: 13px;
+}

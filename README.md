@@ -19,6 +19,7 @@ A Samsung Notes clone evolved into a full-featured AI productivity platform, pow
 - Create web, mobile, API, or other project types
 - Chat with AI to generate architecture, code, and guidance
 - Automatically extracts and tracks generated code files
+- Preview generated files and export them as a ready-to-import ZIP
 - Step-by-step app building workflow
 
 ### 📁 File & Folder Manager
